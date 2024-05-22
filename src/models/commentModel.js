@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-import cultivationApiController from "../controllers/cultivations/cultivationApiController";
 
 const commentSchema = new mongoose.Schema({
     user:{

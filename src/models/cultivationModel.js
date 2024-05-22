@@ -12,7 +12,8 @@ const cultivationSchema = new mongoose.Schema({
     seedtime: {
         type: String,
         enum: ["summer","autumn","winter","spring"],
-        require: true
+        require: true,
+        default: "spring"
     },
     image: {
         type: String,
