@@ -1,4 +1,4 @@
-import cultivationController from "./cultivationController.js";
+import cultivationController from "../../controllers/cultivations/cultivationController.js";
 
 const getAll = async(req,res)=>{
     const cultivations = await cultivationController.getAll();
