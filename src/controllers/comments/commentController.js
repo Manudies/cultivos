@@ -1,8 +1,8 @@
-import commentModel from "../../models/cultivationModel.js";
+import commentModel from "../../models/commentModel.js";
 
-const getAll = async()=> {
+const getAll = async(userId)=> {
     try {
-        const comments = await commentModel.find();
+        const comments = await commentModel.find({users:userId});
         return comments;
     } catch (error) {
         console.error(error);
@@ -15,8 +15,16 @@ const getById = async(id) =>{
         return comment;
     } catch (error) {
         console.error(error);
+        return null;  
+    }
+}
+
+const getByProperty = async(property,value) =>{
+    try {
+        const comment = await commentModel.find({[property]:value})
+        return comment;
+    } catch (error) {
         return null;
-        
     }
 }
 
@@ -49,24 +57,12 @@ const remove = async(id) =>{
         return null;
     }
 }
-const addUser = async(commentId,userId) =>{
-    try {
-        const comment = await getById(commentId);
-        if(!comment.users.includes(userId)){
-            comment.users.push(userId);
-            await comment.save();
-            return comment
-        }
-        return comment;
-    } catch (error) {
-        return null;
-    }
-}
+
 const removeUser = async(commentId,userId)=>{
     try {
         const comment = await getById(commentId);
-        if(comment.users.includes(userId)){
-            comment.users = comment.users.filter(u=> u!==userId);
+        if(comment.user.includes(userId)){
+            comment.user = comment.user.filter(u=> u!==userId);
             await comment.save();
             return comment
         }
@@ -78,10 +74,10 @@ const removeUser = async(commentId,userId)=>{
 export const functions = {
     getAll,
     getById,
+    getByProperty,
     create,
     update,
     remove,
-    addUser,
     removeUser,
 }
 
