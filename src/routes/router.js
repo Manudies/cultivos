@@ -2,8 +2,10 @@
 import {Router} from "express";
 
 import userRouter from "./userRouter.js";
-import cultivationRouter from "./projectRouter.js";
-import commentRouter from "./taskRouter.js";
+import cultivationRouter from "./cultivationRouter.js";
+import commentRouter from "./commentRouter.js";
+import authRouter from "./authRouter.js";
+import { isAdmin, isAuthenticated } from "../middlewares/authMiddleware.js";
 
 const router  =  Router();
 
