@@ -1,3 +1,4 @@
+import userApiController from "../users/userApiController.js";
 import commentController from "./commentController.js";
 
 const getAll = async(req,res)=>{
@@ -34,12 +35,18 @@ const remove = async(req,res)=>{
     res.json({data:comment})
 }
 
+const removeUser = async(req, res)=>{
+    const commentId = req.params.commentId;
+    const userId = req.params.userId;
+    const comment = await commentController.removeUser(commentId,userId);
+    res.json({data:comment})}
+
 export default{
     getAll,
     getById,
     getByProperty,
     create,
     update,
-    remove
+    remove,
+    removeUser
 }
-
