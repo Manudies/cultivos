@@ -9,24 +9,27 @@ const cultivationSchema = new mongoose.Schema({
         type: String,
         require: true
     },
-    date: {
-        type: Date,
-        require: false
+    seedtime: {
+        type: String,
+        enum: ["summer","autumn","winter","spring"],
+        require: true
     },
     image: {
         type: String,
         require: false
     },
-    plague: {
-        type: String,
-        require: false
-    },
-    users: [
-        {
-            type: mongoose.Schema.ObjectId,
-            ref: "users"
-        }
-    ]
+    // //TODO Tabla de plagas
+    // plague: {
+    //     type: String,
+    //     require: false
+    // },
+    // //TODO Usuarios guardan a cultivos favoritos
+    // users: [
+    //     {
+    //         type: mongoose.Schema.ObjectId,
+    //         ref: "users"
+    //     }
+    // ]
 })  
 
 
