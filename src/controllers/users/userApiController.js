@@ -17,6 +17,22 @@ const getByProperty=async(req,res)=>{
     res.json({data:users})
 }
 
+const register = async(req,res)=>{
+    const user = await userController.register(req.body);
+    if(user.error){
+        res.json({error:user.error})
+    }
+    res.json({data:user})
+}
+
+const login = async(req,res)=>{
+    const data = await userController.login(req.body);
+    if(data.error){
+        res.json({error:data.error})
+    }
+    res.json({token:data.token})
+}
+
 const create = async(req,res)=>{
     const user = await userController.create(req.body);
     res.json({data:user})
@@ -38,6 +54,8 @@ export default{
     getAll,
     getById,
     getByProperty,
+    register,
+    login,
     create,
     update,
     remove
