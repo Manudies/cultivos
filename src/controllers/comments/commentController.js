@@ -30,6 +30,15 @@ const getByProperty = async(property,value) =>{
     }
 }
 
+const getByuserId = async(userId) =>{
+    try {
+        const comment = await commentModel.find({user:userId})
+        return comment;
+    } catch (error) {
+        return null;
+    }
+}
+
 const create = async(data) =>{
     try {
         const comment = await commentModel.create(data);
@@ -60,10 +69,12 @@ const remove = async(id) =>{
     }
 }
 
+
 export const functions = {
     getAll,
     getById,
     getByProperty,
+    getByuserId,
     create,
     update,
     remove,
