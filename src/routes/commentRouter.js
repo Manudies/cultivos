@@ -1,13 +1,13 @@
 import {Router} from "express";
-
+import { isAdmin, isAuthenticated } from "../middlewares/authMiddleware.js";
 import commentApiController from "../controllers/comments/commentApiController.js";
 
 
 const router  = Router();
 
-router.get("/",commentApiController.getAll);
-router.get("/byproperty",commentApiController.getByProperty);
-router.get("/:id",commentApiController.getById);
+router.get("/",isAdmin,commentApiController.getAll);
+router.get("/byproperty",isAdmin,commentApiController.getByProperty);
+router.get("/:id",isAdmin,commentApiController.getById);
 router.post("/",commentApiController.create);
 router.put("/:id",commentApiController.update);
 router.delete("/:id",commentApiController.remove);
