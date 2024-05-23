@@ -7,6 +7,7 @@ const router  = Router();
 
 router.get("/",isAdmin,commentApiController.getAll);
 router.get("/byproperty",isAdmin,commentApiController.getByProperty);
+router.get("/byuserid/:userId",isAuthenticated,commentApiController.getByuserId);
 router.get("/:id",isAdmin,commentApiController.getById);
 router.post("/",commentApiController.create);
 router.put("/:id",commentApiController.update);
