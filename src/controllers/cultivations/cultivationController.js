@@ -20,6 +20,15 @@ const getById = async(id) =>{
     }
 }
 
+const getByProperty = async(property,value) =>{
+    try {
+        const comment = await cultivationModel.find({[property]:value})
+        return comment;
+    } catch (error) {
+        return null;
+    }
+}
+
 const create = async(data) =>{
     try {
         const cultivation = await cultivationModel.create(data);
@@ -79,6 +88,7 @@ const remove = async(id) =>{
 export const functions = {
     getAll,
     getById,
+    getByProperty,
     create,
     update,
     remove,
