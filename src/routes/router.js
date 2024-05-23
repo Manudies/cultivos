@@ -14,7 +14,7 @@ router.get("/",(req,res)=>{
 })
 router.use("/users",userRouter);
 router.use("/cultivations",cultivationRouter);
-router.use("/comments",commentRouter);
+router.use("/comments",isAuthenticated,commentRouter);
 router.use("/",authRouter)
 
 export default router;
