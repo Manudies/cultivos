@@ -19,6 +19,12 @@ const getByProperty=async(req,res)=>{
     res.json({data:comments})
 }
 
+const getByuserId=async(req,res)=>{
+    const {userId}=req.params;
+    const comments = await commentController.getByuserId(userId);
+    res.json({data:comments})
+}
+
 const create = async(req,res)=>{
     const userId = req.user._id;
     const data = req.body;
@@ -44,7 +50,8 @@ export default{
     getAll,
     getById,
     getByProperty,
+    getByuserId,
     create,
     update,
-    remove,
+    remove
 }
