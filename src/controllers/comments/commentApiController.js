@@ -1,5 +1,6 @@
 import userApiController from "../users/userApiController.js";
 import commentController from "./commentController.js";
+import cultivationController from "../cultivations/cultivationController.js";
 
 const getAll = async(req,res)=>{
     const comments = await commentController.getAll();
@@ -19,8 +20,12 @@ const getByProperty=async(req,res)=>{
 }
 
 const create = async(req,res)=>{
-    const comment = await commentController.create(req.body);
-    res.json({data:comment})
+    const userId = req.user._id;
+    const data = req.body;
+    data.user = userId
+    console.log(userId);
+    const comment = await commentController.create(data);
+    res.json({data:comment});
 }
 
 const update = async(req,res)=>{
@@ -35,12 +40,6 @@ const remove = async(req,res)=>{
     res.json({data:comment})
 }
 
-const removeUser = async(req, res)=>{
-    const commentId = req.params.commentId;
-    const userId = req.params.userId;
-    const comment = await commentController.removeUser(commentId,userId);
-    res.json({data:comment})}
-
 export default{
     getAll,
     getById,
@@ -48,5 +47,4 @@ export default{
     create,
     update,
     remove,
-    removeUser
 }
