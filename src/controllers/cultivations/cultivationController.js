@@ -49,40 +49,41 @@ const remove = async(id) =>{
         return null;
     }
 }
-const addUser = async(cultivationId,userId) =>{
-    try {
-        const cultivation = await getById(cultivationId);
-        if(!cultivation.users.includes(userId)){
-            cultivation.users.push(userId);
-            await cultivation.save();
-            return cultivation
-        }
-        return cultivation;
-    } catch (error) {
-        return null;
-    }
-}
-const removeUser = async(cultivationId,userId)=>{
-    try {
-        const cultivation = await getById(cultivationId);
-        if(cultivation.users.includes(userId)){
-            cultivation.users = cultivation.users.filter(u=> u!==userId);
-            await cultivation.save();
-            return cultivation
-        }
-        return cultivation;
-    } catch (error) {
-        return null;
-    }
-}
+//TODO: Poder crear una lista de usuarios que tienen en fav un cultivo
+// const addUser = async(cultivationId,userId) =>{
+//     try {
+//         const cultivation = await getById(cultivationId);
+//         if(!cultivation.users.includes(userId)){
+//             cultivation.users.push(userId);
+//             await cultivation.save();
+//             return cultivation
+//         }
+//         return cultivation;
+//     } catch (error) {
+//         return null;
+//     }
+// }
+// const removeUser = async(cultivationId,userId)=>{
+//     try {
+//         const cultivation = await getById(cultivationId);
+//         if(cultivation.users.includes(userId)){
+//             cultivation.users = cultivation.users.filter(u=> u!==userId);
+//             await cultivation.save();
+//             return cultivation
+//         }
+//         return cultivation;
+//     } catch (error) {
+//         return null;
+//     }
+// }
 export const functions = {
     getAll,
     getById,
     create,
     update,
     remove,
-    addUser,
-    removeUser,
+    // addUser,
+    // removeUser,
 }
 
 export default functions;
