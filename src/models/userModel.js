@@ -20,7 +20,13 @@ const userSchema= new mongoose.Schema({
         type:String,
         enum: ["user","jardinero", "admin"],
         default: "user"
-    }
+    },
+    comments: [
+        {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "comments" 
+        }
+    ]
 })
 
 const userModel = mongoose.model ("user", userSchema);
