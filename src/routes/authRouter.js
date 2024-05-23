@@ -5,7 +5,7 @@ import userApiController from "../controllers/users/userApiController.js";
 
 const router  = Router();
 
-router.get("/register",userApiController.register);
-router.get("/login",userApiController.login);
+router.post("/register",userApiController.register);
+router.post("/login",userApiController.login);
 
 export default router;

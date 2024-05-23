@@ -1,18 +1,21 @@
 import mongoose from "mongoose";
 
 const commentSchema = new mongoose.Schema({
-    user:{
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "users"
-        },
     post: {
         type: String,
         require: true
     },
-    cultivation: {
+    user:
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "users"
+        },
+    
+    cultivation:
+        {
         type: mongoose.Schema.Types.ObjectId,
         ref: "cultivations"
-    }
+        }
 })  
 
 

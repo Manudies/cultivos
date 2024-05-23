@@ -1,4 +1,6 @@
 import commentModel from "../../models/commentModel.js";
+import userController from "../users/userController.js";
+import cultivationController from "../cultivations/cultivationController.js";
 
 const getAll = async(userId)=> {
     try {
@@ -58,19 +60,6 @@ const remove = async(id) =>{
     }
 }
 
-const removeUser = async(commentId,userId)=>{
-    try {
-        const comment = await getById(commentId);
-        if(comment.user.includes(userId)){
-            comment.user = comment.user.filter(u=> u!==userId);
-            await comment.save();
-            return comment
-        }
-        return comment;
-    } catch (error) {
-        return null;
-    }
-}
 export const functions = {
     getAll,
     getById,
@@ -78,7 +67,6 @@ export const functions = {
     create,
     update,
     remove,
-    removeUser,
 }
 
 export default functions;

@@ -45,7 +45,7 @@ const register = async(data) =>{
             password,
             role:"user"
         }
-        const user = await userModel.create(userData);
+        const user = await create(userData);
         return user;
     } catch (error) {
         console.error(error); 
@@ -54,7 +54,7 @@ const register = async(data) =>{
 }
 
 const login = async(data) =>{
-    const {email,user, password} = data;
+    const {email,username,password} = data;
     if((!email && !username) || !password){
         return {error:"Faltan datos"};
     }
@@ -73,17 +73,19 @@ const login = async(data) =>{
         }
 
         const isPasswordCorrect = await bcrypt.compare(password,user.password);
-        if(!isPasswordValid){
+        console.log("Contraseña: ",isPasswordCorrect)
+        if(!isPasswordCorrect){
             return {error:"Contraseña incorrecta"};
         }
         const token = jwt.sign({
             _id:user._id,
             username:user.username,
             role:user.role}, 
-            process.env.JWT_SECRET, {expiresIn: "1h"});
+            process.env.JWT_SECRET, {expiresIn:"1d"});
         return {token};
     }
     catch(error){
+        console.error(error);
         return {error:"Error al iniciar sesión"}
     }
 }
@@ -120,6 +122,45 @@ const remove = async(id) =>{
     }
 }
 
+const addComment = async(userId,commentId)=>{
+    try {
+        const user = await getById(userId);
+        console.log(user)
+        if (user.comments===undefined){
+            user.comments = [];
+        }
+        // console.log(user.comments[0])
+        if(!user.comments.includes(commentId)){
+            console.log("No incluye el id del comentario");
+            console.log("ID del Comentario: ",commentId);
+            console.log("ID del Usuario: ",userId)
+            user.comments.push(commentId);
+            await user.save();
+            return user;
+        }
+        console.log(user)
+        return user;
+    } catch (error) {
+        console.error(error);
+        return {error:"no se ha podido añadir el comentario"};
+    }
+}
+const removecomment = async(userId,commentId)=>{
+    try {
+        const user = await getById(userId);
+        if(user.comments.includes(commentId)){
+            user.comments = user.comments.filter(p => !p.equals(commentId));
+            await user.save();
+            return user;
+        }
+        return user;
+    } catch (error) {
+        console.error(error);
+        return {error:"no se ha podido añadir el comentario"};
+    }
+
+}
+
 export const functions = {
     getAll,
     getById,
@@ -128,7 +169,9 @@ export const functions = {
     login,
     create,
     update,
-    remove
+    remove,
+    addComment,
+    removecomment
 }
 
 export default functions;

@@ -20,7 +20,7 @@ const getByProperty=async(req,res)=>{
 const register = async(req,res)=>{
     const user = await userController.register(req.body);
     if(user.error){
-        res.json({error:user.error})
+        return res.json({error:user.error})
     }
     res.json({data:user})
 }
@@ -28,7 +28,7 @@ const register = async(req,res)=>{
 const login = async(req,res)=>{
     const data = await userController.login(req.body);
     if(data.error){
-        res.json({error:data.error})
+        return res.json({error:data.error});
     }
     res.json({token:data.token})
 }
