@@ -12,11 +12,11 @@ const getAll = async()=> {
 const getById = async(id) =>{
     try {
         const cultivation = await cultivationModel.findById(id);
+        
         return cultivation;
     } catch (error) {
         console.error(error);
         return null;
-        
     }
 }
 
