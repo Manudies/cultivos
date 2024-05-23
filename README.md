@@ -1,107 +1,66 @@
-Cultivos API
-La API de Cultivos es una plataforma que permite la gestión de cultivos, usuarios y comentarios. Ofrece operaciones CRUD (Crear, Leer, Actualizar, Eliminar) para cada modelo y permite buscar por propiedades específicas. Además, los usuarios pueden registrarse y loguearse en la aplicación.
+# API de Cultivos
 
-Instalación
-Clona el repositorio:
+## Introducción
 
-bash
-Copiar código
-git clone https://github.com/tu-usuario/cultivos-api.git
-Instala las dependencias:
+La API de Cultivos proporciona un conjunto de endpoints para gestionar cultivos, usuarios y comentarios. Permite a los usuarios explorar el catálogo de cultivos, registrarse, iniciar sesión, dejar comentarios y más.
 
-bash
-Copiar código
-cd cultivos-api
-npm install
-Configura las variables de entorno:
+## Funcionamiento Básico
 
-Crea un archivo .env en el directorio raíz del proyecto y define las variables de entorno necesarias, como la URL de conexión a la base de datos y la clave secreta para JWT.
+- **Explorar Cultivos**: Los usuarios pueden acceder a la lista completa de cultivos disponibles en el catálogo.
 
-plaintext
-Copiar código
-DB_URI=your_database_connection_string
-JWT_SECRET=your_jwt_secret
-Inicia el servidor:
+- **Registro de Usuarios**: Los usuarios pueden registrarse para crear una cuenta en la plataforma.
 
-bash
-Copiar código
-npm start
-Uso
-La API proporciona varios endpoints para interactuar con los modelos de datos. Puedes realizar las siguientes operaciones:
+- **Inicio de Sesión**: Los usuarios registrados pueden iniciar sesión para acceder a funcionalidades adicionales.
 
-Cultivos:
+- **Dejar Comentarios**: Los usuarios pueden dejar comentarios en los cultivos para compartir sus experiencias y opiniones.
 
-Crear un nuevo cultivo
-Obtener todos los cultivos
-Obtener un cultivo por ID
-Actualizar un cultivo existente
-Eliminar un cultivo
-Usuarios:
+## Endpoints Principales
 
-Registrar un nuevo usuario
-Iniciar sesión de usuario
-Obtener información del usuario actual
-Actualizar información del usuario
-Eliminar un usuario
-Comentarios:
+### Cultivos
 
-Crear un nuevo comentario
-Obtener todos los comentarios
-Obtener un comentario por ID
-Actualizar un comentario existente
-Eliminar un comentario
-Para realizar estas operaciones, puedes enviar solicitudes HTTP a los endpoints correspondientes utilizando herramientas como Postman o cURL.
+- `GET /cultivos`: Obtiene una lista de todos los cultivos disponibles.
+- `POST /cultivos`: Crea un nuevo cultivo en el catálogo.
+- `GET /cultivos/:id`: Obtiene detalles de un cultivo específico por su ID.
+- `PUT /cultivos/:id`: Actualiza la información de un cultivo existente.
+- `DELETE /cultivos/:id`: Elimina un cultivo del catálogo.
 
-Endpoints
-Cultivos
-GET /cultivos: Obtener todos los cultivos.
-GET /cultivos/:id: Obtener un cultivo por ID.
-POST /cultivos: Crear un nuevo cultivo.
-PUT /cultivos/:id: Actualizar un cultivo existente.
-DELETE /cultivos/:id: Eliminar un cultivo.
-Usuarios
-POST /usuarios/registro: Registrar un nuevo usuario.
-POST /usuarios/login: Iniciar sesión de usuario.
-GET /usuarios/me: Obtener información del usuario actual.
-PUT /usuarios/me: Actualizar información del usuario.
-DELETE /usuarios/me: Eliminar un usuario.
-Comentarios
-GET /comentarios: Obtener todos los comentarios.
-GET /comentarios/:id: Obtener un comentario por ID.
-POST /comentarios: Crear un nuevo comentario.
-PUT /comentarios/:id: Actualizar un comentario existente.
-DELETE /comentarios/:id: Eliminar un comentario.
-Modelo de Datos
-Los modelos de datos de la API incluyen:
+### Usuarios
 
-Cultivo:
+- `POST /usuarios/registro`: Registra un nuevo usuario.
+- `POST /usuarios/login`: Inicia sesión de un usuario registrado.
 
-name: Nombre del cultivo.
-description: Descripción detallada del cultivo.
-image: URL de la imagen del cultivo.
-seedtime: Estación del año en la que se siembra el cultivo.
-Usuario:
+### Comentarios
 
-username: Nombre de usuario.
-email: Correo electrónico del usuario.
-password: Contraseña del usuario (encriptada).
-createdAt: Fecha de creación del usuario.
-updatedAt: Fecha de actualización del usuario.
-Comentario:
+- `POST /comentarios`: Agrega un nuevo comentario a un cultivo.
+- `GET /comentarios/:cultivoId`: Obtiene todos los comentarios asociados a un cultivo específico.
 
-text: Texto del comentario.
-author: ID del autor del comentario.
-createdAt: Fecha de creación del comentario.
-updatedAt: Fecha de actualización del comentario.
-Autenticación
-La API utiliza tokens de acceso JWT (JSON Web Token) para autenticar a los usuarios en las solicitudes protegidas. Para acceder a los endpoints que requieren autenticación, debes incluir el token JWT en la cabecera de la solicitud HTTP:
 
-plaintext
-Copiar código
-Authorization: Bearer <token>
-Contribuciones
-Si quieres contribuir a este proyecto, por favor abre un issue o envía una solicitud de extracción (pull request) con tus sugerencias.
+# Tecnologías y Dependencias Utilizadas
 
-Licencia
-Este proyecto está bajo la Licencia MIT. Consulta el archivo LICENSE para más detalles.
+## Lenguaje de Programación
+- JavaScript
 
+## Plataforma
+- Node.js
+
+## Framework Web
+- Express.js
+
+## Base de Datos
+- MongoDB (a través de Mongoose)
+
+## Encriptación de Contraseñas
+- bcrypt
+
+## Autenticación y Autorización
+- jsonwebtoken
+
+## Variables de Entorno
+- dotenv
+
+## Herramientas de Desarrollo
+- Pruebas: Jest
+- Recarga Automática en Desarrollo: nodemon
+
+## Contenedorización
+- Docker
