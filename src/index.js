@@ -14,7 +14,7 @@ connectDB();
 app.use("/api-docs",swaggerUi.serve,swaggerUi.setup(swaggerDocument));
 
 app.get("/",(req,res)=>{
-    res.json({message:"Hello World"});
+    res.json({message:"BIENVENIDO A CULTIVAPI"});
 })
 
 app.use("/api",router);
